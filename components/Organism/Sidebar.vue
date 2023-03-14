@@ -2,7 +2,7 @@
   <transition name="slide">
     <div
       v-if="props.isSidebarOpen"
-      class="fixed flex flex-col justify-between items-center w-[20vh] min-h-[95.1vh] bg-yellow-500 left-0 top-0 mt-14"
+      class="fixed flex flex-col justify-between items-center w-[20vh] h-full bg-yellow-500 left-0 top-0 mt-14"
       style="z-index: 999"
     >
       <div class="w-full">

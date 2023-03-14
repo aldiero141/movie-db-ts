@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed flex flex-row justify-between w-screen h-14 bg-blue-700">
+  <div class="fixed flex justify-between inset-x-0 h-14 bg-blue-700">
     <div class="flex flex-row items-center gap-2 p-2">
       <Logo />
       <span

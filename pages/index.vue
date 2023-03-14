@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="flex flex-col pt-[5em] w-screen">
     <MovieList />
   </div>
 </template>

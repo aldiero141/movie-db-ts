@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="w-full h-full">
     <Header @on:click-sidebar="store.toogleSidebar" />
     <Sidebar :is-sidebar-open="store.isShowSidebar" />
-    <slot class="bg-green-500" />
+    <slot />
     <Footer />
   </div>
 </template>

@@ -2,7 +2,7 @@
   <div>
     <Header @on:click-sidebar="store.toogleSidebar" />
     <Sidebar :is-sidebar-open="store.isShowSidebar" />
-    <slot />
+    <slot class="bg-green-500" />
     <Footer />
   </div>
 </template>

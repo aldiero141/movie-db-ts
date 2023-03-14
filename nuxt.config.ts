@@ -12,7 +12,16 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ["@pinia/nuxt"],
+  modules: ["@nuxt-alt/proxy", "@pinia/nuxt"],
+  proxy: {
+    proxies: {
+      "/api/": {
+        target: `${process.env.API_BASE_URL}`,
+        secure: true,
+        changeOrigin: true,
+      },
+    },
+  },
   css: ["~/assets/css/main.css"],
   postcss: {
     plugins: {

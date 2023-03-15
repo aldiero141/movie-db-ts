@@ -1,5 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      API_KEY: process.env.API_KEY,
+      API_BASE_URL: process.env.API_BASE_URL,
+      API_BASE_IMG_URL: process.env.API_BASE_IMG_URL,
+    },
+  },
+
   app: {
     // The private keys which are only available server-side
     head: {
@@ -16,9 +24,11 @@ export default defineNuxtConfig({
   proxy: {
     proxies: {
       "/api/": {
-        target: `${process.env.API_BASE_URL}`,
-        secure: true,
+        target: process.env.API_BASE_URL,
         changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, "/"),
+        // prependPath: true,
+        // secure: true,
       },
     },
   },

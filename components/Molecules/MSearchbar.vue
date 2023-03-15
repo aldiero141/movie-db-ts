@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-row p-4 w-full">
     <AInput
-      class="mr-2"
       v-model="search"
+      class="mr-2"
       :placeholder="'Search Movie...'"
-      @keydown="inputModel"
+      @input="inputValue"
     ></AInput>
     <AButton @on:click="searchButton">Search</AButton>
   </div>
@@ -15,7 +15,11 @@ import AInput from "../Atoms/AInput.vue";
 import AButton from "../Atoms/AButton.vue";
 import { ref } from "vue";
 
-const emit = defineEmits(["on:inputChange", "on:buttonClick"]);
+const emit = defineEmits([
+  "on:inputChange",
+  "on:buttonClick",
+  "update:modelValue",
+]);
 defineProps({
   modelValue: {
     type: String,
@@ -24,8 +28,8 @@ defineProps({
 });
 
 const search = ref("");
-function inputModel(event: Event) {
-  emit("on:inputChange", (event.target as HTMLInputElement).value);
+function inputValue(event: Event) {
+  emit("update:modelValue", (event.target as HTMLInputElement).value);
 }
 function searchButton() {
   emit("on:buttonClick");

@@ -1,8 +1,9 @@
 <template>
   <div class="flex flex-col mx-[2em]">
     <ACard>
-      <MSearchbar @on:input-change="input = $event" />
+      <MSearchbar v-model="search" />
     </ACard>
+    <!-- {{ movie }} -->
   </div>
 </template>
 
@@ -10,8 +11,18 @@
 import MSearchbar from "~~/components/Molecules/MSearchbar.vue";
 import ACard from "../Atoms/ACard.vue";
 import { ref } from "vue";
-const input = ref("");
+import { IResponse, IMovie } from "@/models/movies";
 
-// const data = useFetch("/api/movie/popular");
-// console.log(data);
+const search = ref("");
+
+const config = useRuntimeConfig();
+const api_key: string = config.API_KEY;
+const api_base_url: string = config.API_BASE_URL;
+const api_base_image_url: string = config.API_BASE_IMG_URL;
+// const { data: data } = useFetch(`${api_base_url}/movie/popular`, {
+//   params: {
+//     api_key: api_key,
+//   },
+// });
+// const movie: IResponse<IMovie> = data.value as IResponse<IMovie>;
 </script>

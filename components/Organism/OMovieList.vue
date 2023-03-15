@@ -1,14 +1,14 @@
 <template>
   <div class="flex flex-col mx-[2em]">
-    <Card>
-      <Searchbar @on:input-change="input = $event" />
-    </Card>
+    <ACard>
+      <MSearchbar @on:input-change="input = $event" />
+    </ACard>
   </div>
 </template>
 
 <script setup lang="ts">
-import Searchbar from "~~/components/Molecules/Searchbar.vue";
-import Card from "../Atoms/Card.vue";
+import MSearchbar from "~~/components/Molecules/MSearchbar.vue";
+import ACard from "../Atoms/ACard.vue";
 import { ref } from "vue";
 const input = ref("");
 

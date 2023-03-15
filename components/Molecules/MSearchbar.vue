@@ -1,18 +1,18 @@
 <template>
   <div class="flex flex-row p-4 w-full">
-    <Input
+    <AInput
       class="mr-2"
       v-model="search"
       :placeholder="'Search Movie...'"
       @keydown="inputModel"
-    ></Input>
-    <Button @on:click="searchButton">Search</Button>
+    ></AInput>
+    <AButton @on:click="searchButton">Search</AButton>
   </div>
 </template>
 
 <script setup lang="ts">
-import Input from "../Atoms/Input.vue";
-import Button from "../Atoms/Button.vue";
+import AInput from "../Atoms/AInput.vue";
+import AButton from "../Atoms/AButton.vue";
 import { ref } from "vue";
 
 const emit = defineEmits(["on:inputChange", "on:buttonClick"]);

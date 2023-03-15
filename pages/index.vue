@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-col pt-[5em] w-screen">
-    <MovieList />
+    <OMovieList />
   </div>
 </template>
 
 <script setup lang="ts">
-import MovieList from "~~/components/Organism/MovieList.vue";
+import OMovieList from "~~/components/Organism/OMovieList.vue";
 import { ref } from "vue";
 </script>

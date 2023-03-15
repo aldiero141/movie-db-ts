@@ -1,16 +1,16 @@
 <template>
   <div class="w-full h-full">
-    <Header @on:click-sidebar="store.toogleSidebar" />
-    <Sidebar :is-sidebar-open="store.isShowSidebar" />
+    <OHeader @on:click-sidebar="store.toogleSidebar" />
+    <OSidebar :is-sidebar-open="store.isShowSidebar" />
     <slot />
-    <Footer />
+    <OFooter />
   </div>
 </template>
 
 <script setup lang="ts">
-import Header from "../components/Organism/Header.vue";
-import Footer from "~~/components/Organism/Footer.vue";
-import Sidebar from "~~/components/Organism/Sidebar.vue";
+import OHeader from "../components/Organism/Header.vue";
+import OFooter from "~~/components/Organism/Footer.vue";
+import OSidebar from "~~/components/Organism/OSidebar.vue";
 
 import { useLayoutStore } from "~~/store/layout";
 const store = useLayoutStore();

@@ -2,39 +2,43 @@
   <transition name="slide">
     <div
       v-if="props.isSidebarOpen"
-      class="fixed flex flex-col justify-between items-center w-[20vh] h-full bg-yellow-500 left-0 top-0 mt-14"
+      class="fixed flex flex-col justify-between items-center w-[20vh] h-full bg-white border-2 shadow left-0 top-0 mt-14"
       style="z-index: 999"
     >
       <div class="w-full">
-        <div
-          v-for="(menu, index) in side_menu"
+        <AButton
+          v-for="(menu, index) in menus"
           :key="index"
-          class="p-2 hover:bg-yellow-600 hover:bg-opacity-50 w-full text-center cursor-pointer text-orange-800"
+          text
+          class="flex flex-col items-center justify-center w-full py-6 border-b"
         >
           {{ menu.name }}
-        </div>
+        </AButton>
       </div>
     </div>
   </transition>
 </template>
 
 <script setup lang="ts">
+import { IMenu } from "@/models/menu";
+import AButton from "../Atoms/AButton.vue";
 const props = defineProps({
   isSidebarOpen: { type: Boolean, default: false },
 });
 
-const nav_menu = [
-  { name: "Landing", route: "/landing" },
-  { name: "Dasboard", route: "/dashboard" },
-  { name: "About", route: "/about" },
-];
-
-const side_menu = [
-  { name: "Menu 1", route: "/menu_1" },
-  { name: "Menu 2", route: "/menu_2" },
-  { name: "Menu 3", route: "/menu_3" },
-  { name: "Menu 4", route: "/menu_4" },
-  { name: "Menu 5", route: "/menu_5" },
+const menus: IMenu[] = [
+  {
+    name: "Menu 1",
+    to: "Menu 1",
+  },
+  {
+    name: "Menu 2",
+    to: "Menu 3",
+  },
+  {
+    name: "Menu 1",
+    to: "Menu 4",
+  },
 ];
 
 function onNavbarRoute() {

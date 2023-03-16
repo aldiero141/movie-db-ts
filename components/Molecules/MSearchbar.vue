@@ -6,7 +6,7 @@
       :placeholder="'Search Movie...'"
       @input="inputValue"
     ></AInput>
-    <AButton @on:click="searchButton">Search</AButton>
+    <AButton rounded @on:click="searchButton">Search</AButton>
   </div>
 </template>
 

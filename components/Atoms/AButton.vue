@@ -1,15 +1,13 @@
 <template>
   <button
-    class="flex justify-center items-center rounded px-2 hover:bg-opacity-50 h-[2em] min-w-[2em]"
-    :class="
-      disabled
-        ? 'text-white bg-gray-300'
-        : text
-        ? 'text-white hover:text-blue-300 bg-transparent'
-        : outlined
-        ? 'text-blue-700 border-2 border-blue-700 bg-white'
-        : 'text-white bg-blue-500'
-    "
+    class="flex justify-center items-center px-2 hover:bg-opacity-50 h-[2em] min-w-[2em]"
+    :class="{
+      rounded: rounded,
+      'text-white bg-blue-500': !disabled && !text && !outlined,
+      'text-white bg-gray-300': disabled,
+      'text-black hover:text-gray-600 bg-transparent': text,
+      'text-blue-700 border-2 border-blue-700 bg-white': outlined,
+    }"
     :disabled="disabled"
     @click="$emit('on:click')"
   >
@@ -23,6 +21,7 @@ defineProps({
   text: Boolean,
   danger: Boolean,
   disabled: Boolean,
+  rounded: Boolean,
 });
 
 defineEmits(["on:click"]);

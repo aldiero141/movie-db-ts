@@ -9,7 +9,7 @@ export const useTodosStore = defineStore("todos", () => {
   const completedTodos = computed(() =>
     todos.value.filter((todo) => todo.status == "completed")
   );
-  const uncompletedTodos = computed(() =>
+  const uncompletedTodos = computed<ITask[]>(() =>
     todos.value.filter((todo) => todo.status == "uncompleted")
   );
 

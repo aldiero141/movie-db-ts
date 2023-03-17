@@ -1,7 +1,9 @@
 <template>
   <div class="flex flex-col mx-[2em] gap-8 pb-12">
     <MSearchbar v-model="search" />
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-4 sm:grid-cols-2 w-screen">
+    <div
+      class="grid grid-cols-1 gap-y-10 md:grid-cols-4 sm:grid-cols-2 w-screen"
+    >
       <MMovieCards
         v-for="movie in movies?.results"
         :title="movie.title"

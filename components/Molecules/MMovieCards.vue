@@ -1,10 +1,10 @@
 <template>
   <ACard
-    class="flex flex-col justify-between items-center text-center w-[18em] h-[28em] px-2"
+    class="flex flex-col justify-between items-center text-center w-[20em] h-[28em] px-2"
     fit
   >
     <ATitle class="flex flex-col justify-center items-center h-16">{{
-      title
+      $str_limit(title, 25)
     }}</ATitle>
     <div class="flex flex-col text-center items-center">
       <img class="w-60 h-120" :src="poster" alt="movie-poster" />
@@ -24,4 +24,6 @@ defineProps({
   vote_count: { type: Number, default: 0 },
   rating: { type: Number, default: 0 },
 });
+
+const { $str_limit } = useNuxtApp();
 </script>

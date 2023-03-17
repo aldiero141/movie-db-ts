@@ -1,9 +1,7 @@
 <template>
   <div class="flex flex-col mx-[2em] gap-8 pb-12">
-    <ACard class="w-full">
-      <MSearchbar v-model="search" />
-    </ACard>
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-4 sm:grid-cols-2">
+    <MSearchbar v-model="search" />
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-4 sm:grid-cols-2 w-screen">
       <MMovieCards
         v-for="movie in movies?.results"
         :title="movie.title"
@@ -12,31 +10,22 @@
         :vote_count="movie.vote_count"
       />
     </div>
+    {{ search }}
   </div>
 </template>
 
 <script setup lang="ts">
-import ACard from "../Atoms/ACard.vue";
 import MSearchbar from "../Molecules/MSearchbar.vue";
 import MMovieCards from "../Molecules/MMovieCards.vue";
+import { storeToRefs } from "pinia";
+import { useMoviesStore } from "~~/store/movies";
 import { ref } from "vue";
-import { IData, IMovie } from "@/models/movies";
 
 const search = ref("");
-const config = useRuntimeConfig();
-const api_key: string = config.API_KEY;
-const api_base_url: string = config.API_BASE_URL;
+const store = useMoviesStore();
+const { movies } = storeToRefs(store);
 
-const url = computed<string>(() =>
-  search.value == ""
-    ? `${api_base_url}/movie/popular`
-    : `${api_base_url}/search/movie`
-);
-const searchQuery = computed<string>(() => search.value);
-const { data: movies } = useFetch<IData<IMovie>>(url, {
-  params: {
-    api_key: api_key,
-    query: searchQuery,
-  },
+watch(search, (newValue, oldValue) => {
+  store.setSearch(newValue);
 });
 </script>

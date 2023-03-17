@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row p-4 w-full">
+  <ACard class="flex flex-row p-4 w-full">
     <AInput
       v-model="search"
       class="mr-2"
@@ -7,12 +7,13 @@
       @input="inputValue"
     ></AInput>
     <AButton rounded @on:click="searchButton">Search</AButton>
-  </div>
+  </ACard>
 </template>
 
 <script setup lang="ts">
 import AInput from "../Atoms/AInput.vue";
 import AButton from "../Atoms/AButton.vue";
+import ACard from "../Atoms/ACard.vue";
 import { ref } from "vue";
 
 const emit = defineEmits([

@@ -10,11 +10,15 @@
       >
       <ALogo />
     </div>
-    <div class="flex flex-row items-center gap-3 p-2">
-      <AButton text class="border-l h-[3.5em]" v-for="menu in menus">{{
-        menu.name
-      }}</AButton>
-      <AAvatar />
+    <div class="flex flex-row items-center p-2">
+      <AButton
+        text
+        v-for="menu in menus"
+        :key="menu.name"
+        class="hover:bg-blue-100 h-[3.5em] w-[5em]"
+        >{{ menu.name }}</AButton
+      >
+      <AAvatar class="border-l" />
     </div>
   </div>
 </template>
@@ -32,11 +36,11 @@ const menus: IMenu[] = [
   },
   {
     name: "Menu 2",
-    to: "Menu 3",
+    to: "Menu 2",
   },
   {
-    name: "Menu 1",
-    to: "Menu 4",
+    name: "Menu 3",
+    to: "Menu 3",
   },
 ];
 

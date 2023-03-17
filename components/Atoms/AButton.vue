@@ -1,6 +1,6 @@
 <template>
   <button
-    class="flex justify-center items-center px-2 hover:bg-opacity-50 h-[2em] min-w-[2em]"
+    class="flex justify-center items-center px-2 hover:bg-opacity-90 h-[2em] min-w-[2em]"
     :class="{
       rounded: rounded,
       'text-white bg-blue-500': !disabled && !text && !outlined,

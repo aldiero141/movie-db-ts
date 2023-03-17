@@ -20,26 +20,15 @@
 </template>
 
 <script setup lang="ts">
-import { IMenu } from "@/models/menu";
 import AButton from "../Atoms/AButton.vue";
+import { useSectionStore } from "~~/store/section";
+import { storeToRefs } from "pinia";
 const props = defineProps({
   isSidebarOpen: { type: Boolean, default: false },
 });
 
-const menus: IMenu[] = [
-  {
-    name: "Menu 1",
-    to: "Menu 1",
-  },
-  {
-    name: "Menu 2",
-    to: "Menu 3",
-  },
-  {
-    name: "Menu 1",
-    to: "Menu 4",
-  },
-];
+const store = useSectionStore();
+const { sideMenu: menus } = storeToRefs(store);
 
 function onNavbarRoute() {
   //   router.push({ path: val });

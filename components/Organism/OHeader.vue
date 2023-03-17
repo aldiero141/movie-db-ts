@@ -29,26 +29,11 @@ import AButton from "../Atoms/AButton.vue";
 import AAvatar from "../Atoms/AAvatar.vue";
 import ALogo from "../Atoms/ALogo.vue";
 import { useMoviesStore } from "~~/store/movies";
-import { IMenu } from "@/models/menu";
+import { useSectionStore } from "~~/store/section";
+import { storeToRefs } from "pinia";
 
-const menus: IMenu[] = [
-  {
-    name: "Now Playing",
-    to: "now_playing",
-  },
-  {
-    name: "Popular",
-    to: "popular",
-  },
-  {
-    name: "Top Rated",
-    to: "top_rated",
-  },
-  {
-    name: "Upcoming",
-    to: "upcoming",
-  },
-];
+const sectionStore = useSectionStore();
+const { headerMenu: menus } = storeToRefs(sectionStore);
 
 const store = useMoviesStore();
 const emit = defineEmits(["on:clickSidebar"]);

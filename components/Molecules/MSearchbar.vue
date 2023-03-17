@@ -1,12 +1,15 @@
 <template>
-  <ACard class="flex flex-row p-4 w-full">
+  <ACard class="flex flex-row justify-center p-4 w-full">
     <AInput
       v-model="search"
       class="mr-2"
       :placeholder="'Search Movie...'"
       @input="inputValue"
+      @on:enter="$emit('on:enter')"
     ></AInput>
-    <AButton rounded @on:click="searchButton">Search</AButton>
+    <AButton class="cursor-pointer" rounded @on:click="searchButton"
+      >Search</AButton
+    >
   </ACard>
 </template>
 
@@ -20,6 +23,7 @@ const emit = defineEmits([
   "on:inputChange",
   "on:buttonClick",
   "update:modelValue",
+  "on:enter",
 ]);
 defineProps({
   modelValue: {

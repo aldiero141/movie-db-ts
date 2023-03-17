@@ -4,7 +4,7 @@ import { IData, IMovie } from "../models/movies";
 
 export const useMoviesStore = defineStore("movies", () => {
   const search = ref<string>("");
-  const filter = ref<string>("popular");
+  const filter = ref<string>("now_playing");
   const config = useRuntimeConfig();
   const api_key: string = config.API_KEY;
   const api_base_url: string = config.API_BASE_URL;

@@ -12,6 +12,6 @@ import OHeader from "../components/Organism/OHeader.vue";
 import OFooter from "../components/Organism/OFooter.vue";
 import OSidebar from "../components/Organism/OSidebar.vue";
 
-import { useLayoutStore } from "~~/store/layout";
-const store = useLayoutStore();
+import { useSectionStore } from "~~/store/section";
+const store = useSectionStore();
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="card rounded border-2 border-gray-50 shadow-lg bg-white"
+    class="rounded border border-gray-50 shadow-lg shadow-grey-100 bg-white"
     :class="{
       'w-fit h-fit': fit,
     }"

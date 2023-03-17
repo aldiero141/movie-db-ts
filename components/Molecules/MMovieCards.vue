@@ -4,9 +4,9 @@
     fit
   >
     <ATitle class="flex flex-col justify-center items-center h-16">{{
-      $str_limit(title, 25)
+      $str_limit(title, 22)
     }}</ATitle>
-    <div class="flex flex-col text-center items-center">
+    <div class="flex flex-col text-center items-center pb-4">
       <img class="w-60 h-120" :src="poster" alt="movie-poster" />
       <ARatings :vote_count="vote_count" :rating="rating" />
     </div>

@@ -2,7 +2,7 @@
   <div class="w-full h-8">
     <input
       v-model="value"
-      class="w-full h-full p-2 border-2 border-gray-200 rounded"
+      class="w-full h-full p-2 border-2 border-gray-200 rounded focus:border-blue-500"
       type="text"
       :placeholder="placeholder"
       @input="inputValue"

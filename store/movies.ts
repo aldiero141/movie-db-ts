@@ -3,14 +3,15 @@ import { defineStore } from "pinia";
 import { IData, IMovie } from "../models/movies";
 
 export const useMoviesStore = defineStore("movies", () => {
-  const search = ref("");
+  const search = ref<string>("");
+  const filter = ref<string>("popular");
   const config = useRuntimeConfig();
   const api_key: string = config.API_KEY;
   const api_base_url: string = config.API_BASE_URL;
 
   const url = computed<string>(() =>
     search.value == ""
-      ? `${api_base_url}/movie/popular`
+      ? `${api_base_url}/movie/${filter.value}`
       : `${api_base_url}/search/movie`
   );
 
@@ -26,11 +27,17 @@ export const useMoviesStore = defineStore("movies", () => {
   const setSearch = (payload: string): void => {
     search.value = payload;
   };
+  const setFilter = (payload: string): void => {
+    filter.value = payload;
+  };
 
   return {
+    url,
+    filter,
     movies,
     search,
     getMovies,
     setSearch,
+    setFilter,
   };
 });

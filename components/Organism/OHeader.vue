@@ -15,7 +15,8 @@
         text
         v-for="menu in menus"
         :key="menu.name"
-        class="hover:bg-blue-100 h-[3.5em] w-[5em]"
+        class="hover:bg-blue-100 h-[3.5em] w-[7em]"
+        @on:click="store.setFilter(menu.to)"
         >{{ menu.name }}</AButton
       >
       <AAvatar class="border-l" />
@@ -27,23 +28,29 @@
 import AButton from "../Atoms/AButton.vue";
 import AAvatar from "../Atoms/AAvatar.vue";
 import ALogo from "../Atoms/ALogo.vue";
+import { useMoviesStore } from "~~/store/movies";
 import { IMenu } from "@/models/menu";
 
 const menus: IMenu[] = [
   {
-    name: "Menu 1",
-    to: "Menu 1",
+    name: "Now Playing",
+    to: "now_playing",
   },
   {
-    name: "Menu 2",
-    to: "Menu 2",
+    name: "Popular",
+    to: "popular",
   },
   {
-    name: "Menu 3",
-    to: "Menu 3",
+    name: "Top Rated",
+    to: "top_rated",
+  },
+  {
+    name: "Upcoming",
+    to: "upcoming",
   },
 ];
 
+const store = useMoviesStore();
 const emit = defineEmits(["on:clickSidebar"]);
 
 function toogleSidebar() {

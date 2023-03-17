@@ -1,5 +1,8 @@
 <template>
   <div class="flex flex-col mx-[2em] gap-8 pb-12">
+    <ALabel class="text-3xl text-center">
+      {{ $snakeToTitleCase(filter) }}</ALabel
+    >
     <MSearchbar v-model="search" />
     <div
       class="grid grid-cols-1 gap-y-10 md:grid-cols-4 sm:grid-cols-2 w-screen"
@@ -17,15 +20,17 @@
 </template>
 
 <script setup lang="ts">
+import ALabel from "../Atoms/ALabel.vue";
 import MSearchbar from "../Molecules/MSearchbar.vue";
 import MMovieCards from "../Molecules/MMovieCards.vue";
 import { storeToRefs } from "pinia";
 import { useMoviesStore } from "~~/store/movies";
 import { ref } from "vue";
 
+const { $snakeToTitleCase } = useNuxtApp();
 const search = ref("");
 const store = useMoviesStore();
-const { movies } = storeToRefs(store);
+const { movies, filter, url } = storeToRefs(store);
 
 watch(search, (newValue, oldValue) => {
   store.setSearch(newValue);

@@ -11,6 +11,7 @@
           :key="index"
           text
           class="flex flex-col items-center justify-center w-full py-6 border-b"
+          @on:click="store.setSection(menu.to)"
         >
           {{ menu.name }}
         </AButton>

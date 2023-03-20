@@ -1,59 +1,22 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-import { IMenu } from "@/models/menu";
+import { useHeaderMenu, useSideMenu } from "~~/composables/menu";
 
 export const useSectionStore = defineStore("section", () => {
-  const section = ref<string>("");
-  const headerMenu = ref<IMenu[]>([]);
-  const sideMenu = ref<IMenu[]>([]);
+  const section = ref<string>("movie");
   const isShowSidebar = ref<boolean>(false);
+  const { headerMenu, setHeaderMenu } = useHeaderMenu();
+  const { sideMenu, setSideMenu } = useSideMenu();
 
-  headerMenu.value = [
-    {
-      name: "Now Playing",
-      to: "now_playing",
-    },
-    {
-      name: "Popular",
-      to: "popular",
-    },
-    {
-      name: "Top Rated",
-      to: "top_rated",
-    },
-    {
-      name: "Upcoming",
-      to: "upcoming",
-    },
-  ];
+  setHeaderMenu(section.value);
+  setSideMenu();
 
-  sideMenu.value = [
-    {
-      name: "Menu 1",
-      to: "Menu 1",
-    },
-    {
-      name: "Menu 2",
-      to: "Menu 2",
-    },
-    {
-      name: "Menu 3",
-      to: "Menu 3",
-    },
-  ];
+  watch(section, () => {
+    setHeaderMenu(section.value);
+  });
 
   const toogleSidebar = (): void => {
     isShowSidebar.value = !isShowSidebar.value;
-  };
-
-  const addMenu = (payload: IMenu, type: string) => {
-    if (type == "sidebar") sideMenu.value.push(payload);
-    if (type == "header") headerMenu.value.push(payload);
-  };
-
-  const deleteMenu = (type: string, index: number) => {
-    if (type == "sidebar") sideMenu.value.splice(index, 1);
-    if (type == "header") headerMenu.value.splice(index, 1);
   };
 
   const setSection = (payload: string): void => {
@@ -67,7 +30,5 @@ export const useSectionStore = defineStore("section", () => {
     isShowSidebar,
     toogleSidebar,
     setSection,
-    addMenu,
-    deleteMenu,
   };
 });

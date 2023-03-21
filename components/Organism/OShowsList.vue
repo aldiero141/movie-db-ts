@@ -20,7 +20,6 @@
         :vote_count="show.vote_count"
       />
     </div>
-    {{ search }}
   </div>
 </template>
 
@@ -37,7 +36,13 @@ const search = ref("");
 const store = useShowsStore();
 const { shows, filter } = storeToRefs(store);
 
+store.getShows(filter.value);
+watch(filter, (newValue, oldValue) => {
+  store.getShows(filter.value);
+});
+
 const searchShows = (value: string) => {
-  store.setSearch(value);
+  console.log(value);
+  store.getFilteredShows(value);
 };
 </script>

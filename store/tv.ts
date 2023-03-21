@@ -4,41 +4,44 @@ import { IData } from "../models/api";
 import { IShows } from "../models/tv";
 
 export const useShowsStore = defineStore("shows", () => {
+  const shows = ref();
   const search = ref<string>("");
   const filter = ref<string>("popular");
   const config = useRuntimeConfig();
   const api_key: string = config.API_KEY;
   const api_base_url: string = config.API_BASE_URL;
 
-  const url = computed<string>(() =>
-    search.value == ""
-      ? `${api_base_url}/tv/${filter.value}`
-      : `${api_base_url}/search/tv`
-  );
-
-  const searchQuery = computed<string>(() => search.value);
-  const { data: shows } = useFetch<IData<IShows>>(url, {
-    params: {
-      api_key: api_key,
-      query: searchQuery,
-    },
-  });
-
-  const getShows = computed(() => shows.value);
-  const setSearch = (payload: string): void => {
-    search.value = payload;
+  const getShows = async (payload: string) => {
+    const url = computed<string>(() => `${api_base_url}/tv/${payload}`);
+    const { data } = await useFetch<IData<IShows>>(url, {
+      params: {
+        api_key: api_key,
+      },
+    });
+    shows.value = data.value;
   };
+
+  const getFilteredShows = async (payload: string) => {
+    const url = computed<string>(() => `${api_base_url}/search/tv`);
+    const { data } = await useFetch<IData<IShows>>(url, {
+      params: {
+        api_key: api_key,
+        query: payload,
+      },
+    });
+    shows.value = data.value;
+  };
+
   const setFilter = (payload: string): void => {
     filter.value = payload;
   };
 
   return {
-    url,
-    filter,
     shows,
+    filter,
     search,
     getShows,
-    setSearch,
+    getFilteredShows,
     setFilter,
   };
 });

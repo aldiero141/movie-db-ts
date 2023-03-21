@@ -3,7 +3,7 @@
     <AInput
       v-model="search"
       class="mr-2"
-      :placeholder="'Search Movie...'"
+      :placeholder="placeholder"
       @input="inputValue"
       @on:enter="$emit('on:enter')"
     ></AInput>
@@ -29,6 +29,10 @@ defineProps({
   modelValue: {
     type: String,
     default: "",
+  },
+  placeholder: {
+    type: String,
+    default: "Search...",
   },
 });
 

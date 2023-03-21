@@ -16,7 +16,7 @@
         v-for="menu in menus"
         :key="menu.name"
         class="hover:bg-blue-100 h-[3.5em] w-[7em]"
-        @on:click="store.setFilter(menu.to)"
+        @on:click="setFIlter(menu.to)"
         >{{ menu.name }}</AButton
       >
       <AAvatar class="border-l" />
@@ -31,14 +31,20 @@ import ALogo from "../Atoms/ALogo.vue";
 import { useMoviesStore } from "~~/store/movies";
 import { useSectionStore } from "~~/store/section";
 import { storeToRefs } from "pinia";
+import { useShowsStore } from "~~/store/tv";
 
 const sectionStore = useSectionStore();
 const { headerMenu: menus } = storeToRefs(sectionStore);
 
-const store = useMoviesStore();
+const movieStore = useMoviesStore();
+const showStore = useShowsStore();
 const emit = defineEmits(["on:clickSidebar"]);
 
-function toogleSidebar() {
+const toogleSidebar = () => {
   emit("on:clickSidebar");
-}
+};
+const setFIlter = (payload: string) => {
+  if (sectionStore.section == "movie") movieStore.setFilter(payload);
+  if (sectionStore.section == "tv") showStore.setFilter(payload);
+};
 </script>

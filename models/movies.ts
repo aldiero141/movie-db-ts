@@ -1,10 +1,3 @@
-export interface IData<T> {
-  page: number;
-  results: T[];
-  total_pages: number;
-  total_results: number;
-}
-
 export interface IMovie {
   adult: boolean;
   backdrop_path: string;

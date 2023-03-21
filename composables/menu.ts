@@ -27,8 +27,8 @@ export function useHeaderMenu() {
     if (payload == "tv") {
       headerMenu.value = [
         {
-          name: "Latest",
-          to: "latest",
+          name: "On The Air",
+          to: "on_the_air",
         },
         {
           name: "Popular",
@@ -37,10 +37,6 @@ export function useHeaderMenu() {
         {
           name: "Top Rated",
           to: "top_rated",
-        },
-        {
-          name: "Upcoming",
-          to: "upcoming",
         },
       ];
     }

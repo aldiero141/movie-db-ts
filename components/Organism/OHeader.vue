@@ -9,6 +9,9 @@
         >menu</span
       >
       <ALogo />
+      <ALabel class="ml-4">
+        <span class="uppercase">{{ section }}</span>
+      </ALabel>
     </div>
     <div class="flex flex-row items-center p-2">
       <AButton
@@ -28,13 +31,14 @@
 import AButton from "../Atoms/AButton.vue";
 import AAvatar from "../Atoms/AAvatar.vue";
 import ALogo from "../Atoms/ALogo.vue";
+import ALabel from "../Atoms/ALabel.vue";
 import { useMoviesStore } from "~~/store/movies";
 import { useSectionStore } from "~~/store/section";
 import { storeToRefs } from "pinia";
 import { useShowsStore } from "~~/store/tv";
 
 const sectionStore = useSectionStore();
-const { headerMenu: menus } = storeToRefs(sectionStore);
+const { section, headerMenu: menus } = storeToRefs(sectionStore);
 
 const movieStore = useMoviesStore();
 const showStore = useShowsStore();

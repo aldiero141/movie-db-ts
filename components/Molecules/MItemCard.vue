@@ -9,13 +9,13 @@
     <div class="flex flex-col text-center items-center pb-4">
       <div
         v-if="poster == ''"
-        class="flex flex-col align-center justify-center w-[240px] h-[360px] p-4 bg-gray-200"
+        class="flex flex-col align-center justify-center w-[240px] h-[360px] p-4 bg-gray-200 mb-4"
       >
         No Image Found
       </div>
       <img
         v-if="poster != ''"
-        class="w-60 h-120"
+        class="w-[240px] h-[360px] mb-4"
         :src="poster"
         alt="item-poster"
       />

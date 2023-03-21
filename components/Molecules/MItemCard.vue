@@ -7,7 +7,18 @@
       $str_limit(title, 22)
     }}</ATitle>
     <div class="flex flex-col text-center items-center pb-4">
-      <img class="w-60 h-120" :src="poster" alt="item-poster" />
+      <div
+        v-if="poster == ''"
+        class="flex flex-col align-center justify-center w-[240px] h-[360px] p-4 bg-gray-200"
+      >
+        No Image Found
+      </div>
+      <img
+        v-if="poster != ''"
+        class="w-60 h-120"
+        :src="poster"
+        alt="item-poster"
+      />
       <ARatings :vote_count="vote_count" :rating="rating" />
     </div>
   </ACard>

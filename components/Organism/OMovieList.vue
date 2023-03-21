@@ -15,7 +15,11 @@
       <MItemCard
         v-for="movie in movies?.results"
         :title="movie.title"
-        :poster="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`"
+        :poster="
+          movie.poster_path
+            ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+            : ''
+        "
         :rating="movie.vote_average"
         :vote_count="movie.vote_count"
       />
@@ -36,8 +40,12 @@ const { $snakeToTitleCase } = useNuxtApp();
 const search = ref("");
 const store = useMoviesStore();
 const { movies, filter } = storeToRefs(store);
+store.getMovies(filter.value);
+watch(filter, (newValue, oldValue) => {
+  if (newValue != oldValue) store.getMovies(filter.value);
+});
 
 const searchMovie = (value: string) => {
-  store.setSearch(value);
+  store.getFilteredMovies(value);
 };
 </script>

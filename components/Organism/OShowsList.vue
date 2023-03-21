@@ -15,7 +15,11 @@
       <m-item-card
         v-for="show in shows?.results"
         :title="show.name"
-        :poster="`https://image.tmdb.org/t/p/w500/${show.poster_path}`"
+        :poster="
+          show.poster_path
+            ? `https://image.tmdb.org/t/p/w500/${show.poster_path}`
+            : ''
+        "
         :rating="show.vote_average"
         :vote_count="show.vote_count"
       />
@@ -38,7 +42,7 @@ const { shows, filter } = storeToRefs(store);
 
 store.getShows(filter.value);
 watch(filter, (newValue, oldValue) => {
-  store.getShows(filter.value);
+  if (newValue != oldValue) store.getShows(filter.value);
 });
 
 const searchShows = (value: string) => {

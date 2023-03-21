@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 import { useHeaderMenu, useSideMenu } from "~~/composables/menu";
 
 export const useSectionStore = defineStore("section", () => {
-  const section = ref<string>("tv");
+  const section = ref<string>("movie");
   const isShowSidebar = ref<boolean>(false);
   const { headerMenu, setHeaderMenu } = useHeaderMenu();
   const { sideMenu, setSideMenu } = useSideMenu();

@@ -5,8 +5,7 @@ import { IShows } from "../models/tv";
 
 export const useShowsStore = defineStore("shows", () => {
   const shows = ref();
-  const search = ref<string>("");
-  const filter = ref<string>("popular");
+  const filter = ref<string>("on_the_air");
   const config = useRuntimeConfig();
   const api_key: string = config.API_KEY;
   const api_base_url: string = config.API_BASE_URL;
@@ -39,7 +38,6 @@ export const useShowsStore = defineStore("shows", () => {
   return {
     shows,
     filter,
-    search,
     getShows,
     getFilteredShows,
     setFilter,

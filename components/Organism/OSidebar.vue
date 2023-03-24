@@ -6,22 +6,21 @@
       style="z-index: 999"
     >
       <div class="w-full">
-        <AButton
+        <atoms-a-sidebar-item
           v-for="(menu, index) in menus"
           :key="index"
+          class="w-full py-6 border-b"
           text
-          class="flex flex-col items-center justify-center w-full py-6 border-b"
           @on:click="store.setSection(menu.to)"
         >
           {{ menu.name }}
-        </AButton>
+        </atoms-a-sidebar-item>
       </div>
     </div>
   </transition>
 </template>
 
 <script setup lang="ts">
-import AButton from "../Atoms/AButton.vue";
 import { useSectionStore } from "~~/store/section";
 import { storeToRefs } from "pinia";
 const props = defineProps({

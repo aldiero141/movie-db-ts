@@ -1,8 +1,9 @@
 <template>
   <div class="flex flex-col mx-[2em] gap-8 pb-12 px-8">
-    <atoms-a-label class="text-3xl text-center">
-      {{ $snakeToTitleCase(filter) }}</atoms-a-label
-    >
+    <molecules-m-breadcrumbs
+      :section="'Movie'"
+      :filter="$snakeToTitleCase(filter)"
+    />
 
     <molecules-m-searchbar
       v-model="search"

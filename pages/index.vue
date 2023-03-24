@@ -1,17 +1,18 @@
 <template>
   <div class="flex flex-col pt-[5em] w-screen">
     <template v-if="section == 'movie'">
-      <OMovieList />
+      <organism-o-movie-list />
     </template>
     <template v-if="section == 'tv'">
-      <OShowsList />
+      <organism-o-shows-list />
+    </template>
+    <template v-if="section == 'feedback'">
+      <organism-o-feedback />
     </template>
   </div>
 </template>
 
 <script setup lang="ts">
-import OMovieList from "~~/components/Organism/OMovieList.vue";
-import OShowsList from "~~/components/Organism/OShowsList.vue";
 import { useSectionStore } from "~~/store/section";
 import { storeToRefs } from "pinia";
 const store = useSectionStore();

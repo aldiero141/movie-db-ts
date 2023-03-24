@@ -8,30 +8,26 @@
         @click.stop="toogleSidebar"
         >menu</span
       >
-      <ALogo />
-      <ALabel class="ml-4">
+      <atoms-a-logo />
+      <atoms-a-label class="ml-4">
         <span class="uppercase">{{ section }}</span>
-      </ALabel>
+      </atoms-a-label>
     </div>
     <div class="flex flex-row items-center p-2">
-      <AButton
+      <atoms-a-button
         text
         v-for="menu in menus"
         :key="menu.name"
         class="hover:bg-blue-100 h-[3.5em] w-[7em]"
         @on:click="setFIlter(menu.to)"
-        >{{ menu.name }}</AButton
+        >{{ menu.name }}</atoms-a-button
       >
-      <AAvatar class="border-l" />
+      <atoms-a-avatar class="border-l" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import AButton from "../Atoms/AButton.vue";
-import AAvatar from "../Atoms/AAvatar.vue";
-import ALogo from "../Atoms/ALogo.vue";
-import ALabel from "../Atoms/ALabel.vue";
 import { useMoviesStore } from "~~/store/movies";
 import { useSectionStore } from "~~/store/section";
 import { storeToRefs } from "pinia";

@@ -1,11 +1,11 @@
 <template>
-  <ACard
+  <atoms-a-card
     class="flex flex-col justify-between items-center text-center w-[20em] h-[28em] px-2"
     fit
   >
-    <ATitle class="flex flex-col justify-center items-center h-16">{{
+    <atoms-a-title class="flex flex-col justify-center items-center h-16">{{
       $str_limit(title, 22)
-    }}</ATitle>
+    }}</atoms-a-title>
     <div class="flex flex-col text-center items-center pb-4">
       <div
         v-if="poster == ''"
@@ -19,16 +19,12 @@
         :src="poster"
         alt="item-poster"
       />
-      <ARatings :vote_count="vote_count" :rating="rating" />
+      <atoms-a-ratings :vote_count="vote_count" :rating="rating" />
     </div>
-  </ACard>
+  </atoms-a-card>
 </template>
 
 <script setup>
-import ACard from "../Atoms/ACard.vue";
-import ATitle from "../Atoms/ATitle.vue";
-import ARatings from "../Atoms/ARatings.vue";
-
 defineProps({
   title: { type: String, default: "" },
   poster: { type: String, default: "" },

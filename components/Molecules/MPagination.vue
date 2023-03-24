@@ -2,7 +2,7 @@
   <div class="flex flex-col items-center justify-center">
     <nav aria-label="Page navigation example">
       <ul class="inline-flex items-center -space-x-px rounded-lg border">
-        <AtomsAPaginationButton @on:click="$emit('prevPage', prevPage)">
+        <atoms-a-pagination-button @on:click="$emit('prevPage', prevPage)">
           <span class="sr-only">Previous</span>
           <svg
             aria-hidden="true"
@@ -17,14 +17,14 @@
               clip-rule="evenodd"
             ></path>
           </svg>
-        </AtomsAPaginationButton>
+        </atoms-a-pagination-button>
 
-        <AtomsAPaginationButton v-if="props.currentPage - 2 > 0">
+        <atoms-a-pagination-button v-if="props.currentPage - 2 > 0">
           ...
-        </AtomsAPaginationButton>
+        </atoms-a-pagination-button>
 
         <template v-for="(total, index) in props.totalPages">
-          <AtomsAPaginationButton
+          <atoms-a-pagination-button
             v-if="
               index < props.currentPage + 2 && index > props.currentPage - 4
             "
@@ -32,12 +32,14 @@
             :active="props.currentPage == index + 1"
           >
             {{ index + 1 }}
-          </AtomsAPaginationButton>
+          </atoms-a-pagination-button>
         </template>
-        <AtomsAPaginationButton v-if="props.currentPage + 2 < props.totalPages">
+        <atoms-a-pagination-button
+          v-if="props.currentPage + 2 < props.totalPages"
+        >
           ...
-        </AtomsAPaginationButton>
-        <AtomsAPaginationButton @on:click="$emit('nextPage', nextPage)">
+        </atoms-a-pagination-button>
+        <atoms-a-pagination-button @on:click="$emit('nextPage', nextPage)">
           <span class="sr-only">Next</span>
           <svg
             aria-hidden="true"
@@ -52,7 +54,7 @@
               clip-rule="evenodd"
             ></path>
           </svg>
-        </AtomsAPaginationButton>
+        </atoms-a-pagination-button>
       </ul>
     </nav>
   </div>

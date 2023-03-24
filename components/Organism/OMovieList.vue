@@ -1,16 +1,17 @@
 <template>
   <div class="flex flex-col mx-[2em] gap-8 pb-12 px-8">
-    <ALabel class="text-3xl text-center">
-      {{ $snakeToTitleCase(filter) }}</ALabel
+    <atoms-a-label class="text-3xl text-center">
+      {{ $snakeToTitleCase(filter) }}</atoms-a-label
     >
-    <MSearchbar
+
+    <molecules-m-searchbar
       v-model="search"
       :placeholder="'Search Movie...'"
       @on:enter="searchMovie(search)"
       @on:buttonClick="searchMovie(search)"
     />
 
-    <MoleculesMPagination
+    <molecules-m-pagination
       :current-page="movies.page"
       :total-pages="movies.total_pages"
       @on-page="toPage($event, filter)"
@@ -21,7 +22,7 @@
     <div
       class="grid grid-cols-1 gap-y-10 md:grid-cols-4 sm:grid-cols-2 w-full content-center place-items-center"
     >
-      <MItemCard
+      <molecules-m-item-card
         v-for="movie in movies?.results"
         :title="movie.title"
         :poster="
@@ -37,9 +38,6 @@
 </template>
 
 <script setup lang="ts">
-import ALabel from "../Atoms/ALabel.vue";
-import MSearchbar from "../Molecules/MSearchbar.vue";
-import MItemCard from "../Molecules/MItemCard.vue";
 import { storeToRefs } from "pinia";
 import { useMoviesStore } from "@/store/movies";
 import { ref } from "vue";
@@ -55,7 +53,6 @@ watch(filter, (newValue, oldValue) => {
 });
 
 const toPage = async (page: number, filter: string) => {
-  // console.log(page, filter);
   await store.toPage(page, filter);
 };
 

@@ -20,6 +20,17 @@ export const useShowsStore = defineStore("shows", () => {
     shows.value = data.value;
   };
 
+  const toPage = async (page: number, filter: string) => {
+    const url = computed<string>(() => `${api_base_url}/tv/${filter}`);
+    const { data } = await useFetch<IData<IShows>>(url, {
+      params: {
+        api_key: api_key,
+        page: page,
+      },
+    });
+    shows.value = data.value;
+  };
+
   const getFilteredShows = async (payload: string) => {
     const url = computed<string>(() => `${api_base_url}/search/tv`);
     const { data } = await useFetch<IData<IShows>>(url, {
@@ -41,5 +52,6 @@ export const useShowsStore = defineStore("shows", () => {
     getShows,
     getFilteredShows,
     setFilter,
+    toPage,
   };
 });

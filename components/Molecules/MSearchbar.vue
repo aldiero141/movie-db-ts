@@ -1,22 +1,19 @@
 <template>
-  <ACard class="flex flex-row justify-center p-4 w-full">
-    <AInput
+  <atoms-a-card class="flex flex-row justify-center p-4 w-full">
+    <atoms-a-input
       v-model="search"
       class="mr-2"
       :placeholder="placeholder"
       @input="inputValue"
       @on:enter="$emit('on:enter')"
-    ></AInput>
-    <AButton class="cursor-pointer" rounded @on:click="searchButton"
-      >Search</AButton
+    ></atoms-a-input>
+    <atoms-a-button class="cursor-pointer" rounded @on:click="searchButton"
+      >Search</atoms-a-button
     >
-  </ACard>
+  </atoms-a-card>
 </template>
 
 <script setup lang="ts">
-import AInput from "../Atoms/AInput.vue";
-import AButton from "../Atoms/AButton.vue";
-import ACard from "../Atoms/ACard.vue";
 import { ref } from "vue";
 
 const emit = defineEmits([

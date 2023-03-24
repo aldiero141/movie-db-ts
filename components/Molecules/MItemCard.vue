@@ -1,6 +1,6 @@
 <template>
   <atoms-a-card
-    class="flex flex-col justify-between items-center text-center w-[20em] h-[28em] px-2"
+    class="flex flex-col justify-between items-center text-center w-[300px] h-[460px] px-2"
     fit
   >
     <atoms-a-title class="flex flex-col justify-center items-center h-16">{{

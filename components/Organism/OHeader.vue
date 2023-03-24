@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed flex justify-between inset-x-0 h-14 bg-white border-2 shadow-xl"
+    class="fixed flex justify-between inset-x-0 h-14 bg-white border-2 drop-shadow-md z-10"
   >
     <div class="flex flex-row items-center gap-2 p-2">
       <span

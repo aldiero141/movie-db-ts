@@ -19,7 +19,7 @@
           </svg>
         </atoms-a-pagination-button>
 
-        <atoms-a-pagination-button v-if="props.currentPage - 2 > 0">
+        <atoms-a-pagination-button v-if="props.currentPage - 3 > 0">
           ...
         </atoms-a-pagination-button>
 
@@ -35,7 +35,7 @@
           </atoms-a-pagination-button>
         </template>
         <atoms-a-pagination-button
-          v-if="props.currentPage + 2 < props.totalPages"
+          v-if="props.currentPage + 3 < props.totalPages"
         >
           ...
         </atoms-a-pagination-button>

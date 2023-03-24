@@ -20,6 +20,17 @@ export const useMoviesStore = defineStore("movies", () => {
     movies.value = data.value;
   };
 
+  const toPage = async (page: number, filter: string) => {
+    const url = computed<string>(() => `${api_base_url}/movie/${filter}`);
+    const { data } = await useFetch<IData<IMovie>>(url, {
+      params: {
+        api_key: api_key,
+        page: page,
+      },
+    });
+    movies.value = data.value;
+  };
+
   const getFilteredMovies = async (payload: string) => {
     const url = computed<string>(() => `${api_base_url}/search/movie`);
     const { data } = await useFetch<IData<IMovie>>(url, {
@@ -41,5 +52,6 @@ export const useMoviesStore = defineStore("movies", () => {
     getMovies,
     getFilteredMovies,
     setFilter,
+    toPage,
   };
 });

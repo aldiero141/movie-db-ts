@@ -9,6 +9,15 @@
       @on:enter="searchMovie(search)"
       @on:buttonClick="searchMovie(search)"
     />
+
+    <MoleculesMPagination
+      :current-page="movies.page"
+      :total-pages="movies.total_pages"
+      @on-page="toPage($event, filter)"
+      @prev-page="toPage($event, filter)"
+      @next-page="toPage($event, filter)"
+    />
+
     <div
       class="grid grid-cols-1 gap-y-10 md:grid-cols-4 sm:grid-cols-2 w-full content-center place-items-center"
     >
@@ -24,7 +33,6 @@
         :vote_count="movie.vote_count"
       />
     </div>
-    {{ search }}
   </div>
 </template>
 
@@ -40,10 +48,16 @@ const { $snakeToTitleCase } = useNuxtApp();
 const search = ref("");
 const store = useMoviesStore();
 const { movies, filter } = storeToRefs(store);
-store.getMovies(filter.value);
+
+await store.getMovies(filter.value);
 watch(filter, (newValue, oldValue) => {
   if (newValue != oldValue) store.getMovies(filter.value);
 });
+
+const toPage = async (page: number, filter: string) => {
+  // console.log(page, filter);
+  await store.toPage(page, filter);
+};
 
 const searchMovie = (value: string) => {
   store.getFilteredMovies(value);

@@ -4,6 +4,9 @@ import { IMenu } from "@/models/menu";
 export function useHeaderMenu() {
   const headerMenu = ref<IMenu[]>([]);
   const setHeaderMenu = (payload: string) => {
+    if (payload == "feedback") {
+      headerMenu.value = [];
+    }
     if (payload == "movie") {
       headerMenu.value = [
         {

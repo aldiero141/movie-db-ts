@@ -13,28 +13,36 @@
     />
 
     <molecules-m-pagination
-      :current-page="movies.page"
-      :total-pages="movies.total_pages"
-      @on-page="toPage($event, filter)"
-      @prev-page="toPage($event, filter)"
-      @next-page="toPage($event, filter)"
+      :current-page="movies?.page"
+      :total-pages="movies?.total_pages"
+      @on-page="toPage($event)"
+      @prev-page="toPage($event)"
+      @next-page="toPage($event)"
     />
 
-    <div
-      class="grid grid-cols-1 gap-y-10 md:grid-cols-4 sm:grid-cols-2 w-full content-center place-items-center"
-    >
-      <molecules-m-item-card
-        v-for="movie in movies?.results"
-        :title="movie.title"
-        :poster="
-          movie.poster_path
-            ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-            : ''
-        "
-        :rating="movie.vote_average"
-        :vote_count="movie.vote_count"
-      />
-    </div>
+    <template v-if="loading">
+      <div class="flex flex-col w-full h-[40vh] justify-center items-center">
+        <atoms-a-loading />
+      </div>
+    </template>
+
+    <template v-if="!loading">
+      <div
+        class="grid grid-cols-1 gap-y-10 md:grid-cols-4 sm:grid-cols-2 w-full content-center place-items-center"
+      >
+        <molecules-m-item-card
+          v-for="movie in movies?.results"
+          :title="movie.title"
+          :poster="
+            movie.poster_path
+              ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+              : ''
+          "
+          :rating="movie.vote_average"
+          :vote_count="movie.vote_count"
+        />
+      </div>
+    </template>
   </div>
 </template>
 
@@ -46,18 +54,19 @@ import { ref } from "vue";
 const { $snakeToTitleCase } = useNuxtApp();
 const search = ref("");
 const store = useMoviesStore();
-const { movies, filter } = storeToRefs(store);
+const { movies, filter, loading, page, query } = storeToRefs(store);
 
-await store.getMovies(filter.value);
-watch(filter, (newValue, oldValue) => {
-  if (newValue != oldValue) store.getMovies(filter.value);
+await store.getMovies();
+
+watch([filter, page, query], async () => {
+  await store.getMovies();
 });
 
-const toPage = async (page: number, filter: string) => {
-  await store.toPage(page, filter);
+const toPage = (arg: number) => {
+  store.setPage(arg);
 };
 
-const searchMovie = (value: string) => {
-  store.getFilteredMovies(value);
+const searchMovie = (arg: string) => {
+  store.setQuery(arg);
 };
 </script>

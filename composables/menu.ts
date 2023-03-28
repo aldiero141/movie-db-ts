@@ -62,10 +62,12 @@ export function useSideMenu() {
       {
         name: "Movie",
         to: "movie",
+        icon: "movie",
       },
       {
         name: "TV",
         to: "tv",
+        icon: "tv",
       },
     ];
   };

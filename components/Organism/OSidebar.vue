@@ -13,7 +13,8 @@
           text
           @on:click="store.setSection(menu.to)"
         >
-          {{ menu.name }}
+          <span class="material-icons">{{ menu.icon }}</span>
+          <span class="ml-4">{{ menu.name }}</span>
         </atoms-a-sidebar-item>
       </div>
     </div>

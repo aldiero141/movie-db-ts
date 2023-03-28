@@ -41,8 +41,6 @@ export const useMoviesStore = defineStore("movies", () => {
       {
         watch: [filter, page],
       };
-
-    //
   };
 
   // const toPage = async (page: number, filter: string) => {

@@ -54,11 +54,12 @@ import { ref } from "vue";
 const { $snakeToTitleCase } = useNuxtApp();
 const search = ref("");
 const store = useMoviesStore();
-const { movies, filter, loading, page, query } = storeToRefs(store);
+const { movies, filter, loading, page } = storeToRefs(store);
 
 await store.getMovies();
 
-watch([filter, page, query], async () => {
+watch([filter, page], async ([newFilter, newPage], [oldFilter, oldPage]) => {
+  if (newFilter !== oldFilter) store.setPage(1);
   await store.getMovies();
 });
 

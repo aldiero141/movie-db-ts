@@ -13,28 +13,36 @@
     />
 
     <molecules-m-pagination
-      :current-page="shows.page"
-      :total-pages="shows.total_pages"
-      @on-page="toPage($event, filter)"
-      @prev-page="toPage($event, filter)"
-      @next-page="toPage($event, filter)"
+      :current-page="shows?.page"
+      :total-pages="shows?.total_pages"
+      @on-page="toPage($event)"
+      @prev-page="toPage($event)"
+      @next-page="toPage($event)"
     />
 
-    <div
-      class="grid grid-cols-1 gap-y-10 md:grid-cols-4 sm:grid-cols-2 w-full content-center place-items-center"
-    >
-      <molecules-m-item-card
-        v-for="show in shows?.results"
-        :title="show.name"
-        :poster="
-          show.poster_path
-            ? `https://image.tmdb.org/t/p/w500/${show.poster_path}`
-            : ''
-        "
-        :rating="show.vote_average"
-        :vote_count="show.vote_count"
-      />
-    </div>
+    <template v-if="loading">
+      <div class="flex flex-col w-full h-[40vh] justify-center items-center">
+        <atoms-a-loading />
+      </div>
+    </template>
+
+    <template v-if="!loading">
+      <div
+        class="grid grid-cols-1 gap-y-10 md:grid-cols-4 sm:grid-cols-2 w-full content-center place-items-center"
+      >
+        <molecules-m-item-card
+          v-for="show in shows?.results"
+          :title="show.name"
+          :poster="
+            show.poster_path
+              ? `https://image.tmdb.org/t/p/w500/${show.poster_path}`
+              : ''
+          "
+          :rating="show.vote_average"
+          :vote_count="show.vote_count"
+        />
+      </div>
+    </template>
   </div>
 </template>
 
@@ -46,19 +54,19 @@ import { ref } from "vue";
 const { $snakeToTitleCase } = useNuxtApp();
 const search = ref("");
 const store = useShowsStore();
-const { shows, filter } = storeToRefs(store);
+const { shows, filter, loading, page } = storeToRefs(store);
 
-store.getShows(filter.value);
-watch(filter, (newValue, oldValue) => {
-  if (newValue != oldValue) store.getShows(filter.value);
+await store.getShows();
+watch([filter, page], async ([newFilter, newPage], [oldFilter, oldPage]) => {
+  if (newFilter !== oldFilter) store.setPage(1);
+  await store.getShows();
 });
 
-const toPage = async (page: number, filter: string) => {
-  await store.toPage(page, filter);
+const toPage = (arg: number) => {
+  store.setPage(arg);
 };
 
-const searchShows = (value: string) => {
-  console.log(value);
-  store.getFilteredShows(value);
+const searchShows = async (arg: string) => {
+  await store.getFilteredShows(arg);
 };
 </script>

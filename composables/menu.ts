@@ -67,10 +67,6 @@ export function useSideMenu() {
         name: "TV",
         to: "tv",
       },
-      {
-        name: "Feedback",
-        to: "feedback",
-      },
     ];
   };
   const addMenu = (payload: IMenu, type: string) => {

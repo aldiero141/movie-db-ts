@@ -1,7 +1,7 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-// import { IData } from "../models/api";
-// import { IMovie } from "../models/movies";
+import { IData } from "../models/api";
+import { IMovie } from "../models/movies";
 
 export const useMoviesStore = defineStore("movies", () => {
   const movies = ref();
@@ -30,17 +30,16 @@ export const useMoviesStore = defineStore("movies", () => {
       baseURL: `${api_base_url}`,
       params: {
         api_key: api_key,
-        query: query.value,
         page: page.value,
       },
     }).then(function (res) {
       movies.value = res;
       setTimeout(() => {
         loading.value = false;
-      }, 1000);
+      }, 500);
     }),
       {
-        watch: [filter, page, query],
+        watch: [filter, page],
       };
 
     //
@@ -57,25 +56,28 @@ export const useMoviesStore = defineStore("movies", () => {
   //   movies.value = data.value;
   // };
 
-  // const getFilteredMovies = async (payload: string) => {
-  //   const url = computed<string>(() => `${api_base_url}/search/movie`);
-  //   const { data } = await useFetch<IData<IMovie>>(url, {
-  //     params: {
-  //       api_key: api_key,
-  //       query: payload,
-  //     },
-  //   });
-  //   movies.value = data.value;
-  // };
+  const getFilteredMovies = async (payload: string) => {
+    loading.value = true;
+    const { data } = await useLazyFetch<IData<IMovie>>(
+      `${api_base_url}/search/movie`,
+      {
+        params: {
+          api_key: api_key,
+          query: payload,
+        },
+      }
+    );
+    movies.value = data.value;
+    setTimeout(() => {
+      loading.value = false;
+    }, 500);
+  };
 
   const setFilter = (payload: string): void => {
     filter.value = payload;
   };
   const setPage = (payload: number): void => {
     page.value = payload;
-  };
-  const setQuery = (payload: string): void => {
-    query.value = payload;
   };
 
   return {
@@ -85,10 +87,9 @@ export const useMoviesStore = defineStore("movies", () => {
     page,
     query,
     getMovies,
-    // getFilteredMovies,
+    getFilteredMovies,
     setFilter,
     setPage,
-    setQuery,
     // toPage,
   };
 });

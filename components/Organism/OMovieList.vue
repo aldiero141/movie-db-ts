@@ -66,7 +66,7 @@ const toPage = (arg: number) => {
   store.setPage(arg);
 };
 
-const searchMovie = (arg: string) => {
-  store.setQuery(arg);
+const searchMovie = async (arg: string) => {
+  await store.getFilteredMovies(arg);
 };
 </script>

@@ -12,7 +12,7 @@
       @on:buttonClick="searchShows(search)"
     />
 
-    <MoleculesMPagination
+    <molecules-m-pagination
       :current-page="shows.page"
       :total-pages="shows.total_pages"
       @on-page="toPage($event, filter)"

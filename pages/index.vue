@@ -6,9 +6,6 @@
     <template v-if="section == 'tv'">
       <organism-o-shows-list />
     </template>
-    <template v-if="section == 'feedback'">
-      <organism-o-feedback />
-    </template>
   </div>
 </template>
 

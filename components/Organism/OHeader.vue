@@ -22,20 +22,25 @@
         @on:click="setFIlter(menu.to)"
         >{{ menu.name }}</atoms-a-button
       >
-      <atoms-a-avatar class="border-l" />
+      <atoms-a-avatar class="border-l cursor-pointer" @click="show = !show" />
+      <atoms-a-card v-if="show" class="fixed top-16 right-2 p-2">
+        <atoms-a-button text class="p-4">Profile</atoms-a-button>
+        <atoms-a-button danger class="p-4">Sign Out</atoms-a-button>
+      </atoms-a-card>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
 import { useMoviesStore } from "~~/store/movies";
 import { useSectionStore } from "~~/store/section";
 import { storeToRefs } from "pinia";
 import { useShowsStore } from "~~/store/tv";
-
 const sectionStore = useSectionStore();
 const { section, headerMenu: menus } = storeToRefs(sectionStore);
 
+const show = ref(false);
 const movieStore = useMoviesStore();
 const showStore = useShowsStore();
 const emit = defineEmits(["on:clickSidebar"]);

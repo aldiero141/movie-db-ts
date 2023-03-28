@@ -18,6 +18,8 @@
       @on-page="toPage($event)"
       @prev-page="toPage($event)"
       @next-page="toPage($event)"
+      @to-start="toPage(1)"
+      @to-end="toPage(shows?.total_pages)"
     />
 
     <template v-if="loading">

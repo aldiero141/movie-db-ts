@@ -37,12 +37,7 @@ export const useShowsStore = defineStore("shows", () => {
       setTimeout(() => {
         loading.value = false;
       }, 500);
-    }),
-      {
-        watch: [filter, page],
-      };
-
-    //
+    });
   };
 
   // const toPage = async (page: number, filter: string) => {

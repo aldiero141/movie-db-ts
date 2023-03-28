@@ -2,7 +2,7 @@
   <li>
     <a
       href="#"
-      class="block px-3 py-2 leading-tight border-x border-gray-100 hover:text-gray-400 hover:cursor-pointer"
+      class="flex flex-row items-center justify-center w-[2.5em] h-full py-2 leading-tight border-x border-gray-100 hover:text-gray-400 hover:cursor-pointer"
       :class="{
         'bg-blue-500 text-white': active,
         'text-black bg-transparent': !active,

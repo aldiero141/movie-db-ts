@@ -1,28 +1,16 @@
 <template>
   <div class="flex flex-col items-center justify-center">
     <nav aria-label="Page navigation example">
-      <ul class="inline-flex items-center -space-x-px rounded-lg border">
-        <atoms-a-pagination-button @on:click="$emit('prevPage', prevPage)">
-          <span class="sr-only">Previous</span>
-          <svg
-            aria-hidden="true"
-            class="w-5 h-5"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
+      <ul class="inline-flex rounded-lg border">
+        <atoms-a-pagination-button @on:click="$emit('toStart', start)">
+          <span class="material-icons"> keyboard_double_arrow_left </span>
         </atoms-a-pagination-button>
-
+        <atoms-a-pagination-button @on:click="$emit('prevPage', prevPage)">
+          <span class="material-icons"> chevron_left </span>
+        </atoms-a-pagination-button>
         <atoms-a-pagination-button v-if="props.currentPage - 3 > 0">
           ...
         </atoms-a-pagination-button>
-
         <template v-for="(total, index) in props.totalPages">
           <atoms-a-pagination-button
             v-if="
@@ -40,20 +28,11 @@
           ...
         </atoms-a-pagination-button>
         <atoms-a-pagination-button @on:click="$emit('nextPage', nextPage)">
-          <span class="sr-only">Next</span>
-          <svg
-            aria-hidden="true"
-            class="w-5 h-5"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
+          <span class="material-icons"> chevron_right </span>
+        </atoms-a-pagination-button>
+
+        <atoms-a-pagination-button @on:click="$emit('toEnd', end)">
+          <span class="material-icons"> keyboard_double_arrow_right </span>
         </atoms-a-pagination-button>
       </ul>
     </nav>
@@ -61,13 +40,13 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 const props = defineProps({
   totalPages: Number,
   currentPage: Number,
 });
 const emit = defineEmits(["onPage", "nextPage", "prevPage"]);
-
+const maxShown = ref(6);
 const nextPage = computed(() => {
   if (props.currentPage == props.totalPages) return;
   return props.currentPage + 1;

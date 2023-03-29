@@ -1,17 +1,10 @@
 <template>
-  <div class="w-full h-full">
-    <OHeader @on:click-sidebar="store.toogleSidebar" />
-    <OSidebar :is-sidebar-open="store.isShowSidebar" />
+  <div class="flex flex-col w-full h-full">
     <slot />
-    <OFooter />
   </div>
 </template>
 
 <script setup lang="ts">
-import OHeader from "../components/Organism/OHeader.vue";
-import OFooter from "../components/Organism/OFooter.vue";
-import OSidebar from "../components/Organism/OSidebar.vue";
-
 import { useSectionStore } from "~~/store/section";
 const store = useSectionStore();
 </script>

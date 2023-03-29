@@ -1,19 +1,21 @@
 <template>
-  <div class="w-full h-8">
-    <input
-      v-model="value"
-      class="w-full h-full p-2 border-2 border-gray-200 rounded focus:border-blue-500"
-      :type="type"
+  <div class="mb-2">
+    <atoms-a-label>
+      {{ label }}
+    </atoms-a-label>
+    <atoms-a-input
+      v-model="input_value"
       :placeholder="placeholder"
+      :type="type"
       @input="inputValue"
-      @keydown.enter="$emit('on:enter')"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits(["update:modelValue", "on:enter"]);
+import { ref } from "vue";
 defineProps({
+  label: { type: String, default: "" },
   placeholder: {
     type: String,
     default: "",
@@ -24,11 +26,12 @@ defineProps({
   },
   type: {
     type: String,
-    default: "text",
+    default: "",
   },
 });
 
-const value = ref("");
+const emit = defineEmits(["update:modelValue", "on:enter"]);
+const input_value = ref("");
 
 function inputValue(event: Event) {
   emit("update:modelValue", (event.target as HTMLInputElement).value);

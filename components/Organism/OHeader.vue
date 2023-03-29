@@ -25,7 +25,9 @@
       <atoms-a-avatar class="border-l cursor-pointer" @click="show = !show" />
       <atoms-a-card v-if="show" class="fixed top-16 right-2 p-2">
         <atoms-a-button text class="p-4">Profile</atoms-a-button>
-        <atoms-a-button danger class="p-4">Sign Out</atoms-a-button>
+        <atoms-a-button danger class="p-4" @on:click="logout"
+          >Sign Out</atoms-a-button
+        >
       </atoms-a-card>
     </div>
   </div>
@@ -51,5 +53,11 @@ const toogleSidebar = () => {
 const setFIlter = (payload: string) => {
   if (sectionStore.section == "movie") movieStore.setFilter(payload);
   if (sectionStore.section == "tv") showStore.setFilter(payload);
+};
+
+const logout = () => {
+  const auth = useCookie("auth");
+  auth.value = null;
+  navigateTo("/");
 };
 </script>

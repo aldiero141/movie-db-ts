@@ -58,18 +58,23 @@ const password = ref("");
 const auth = useCookie("auth");
 auth.value = null;
 
+watch(isShowWarning, (new_warning) => {
+  setTimeout(() => {
+    if (new_warning == true) store.setWarningVisibility(false);
+  }, 1000);
+});
+
 const login = (arg: IAuth) => {
   store.setAuth(store.validateAccount(arg));
 
   if (isAuthenticated.value == false) {
     store.setWarningVisibility(true);
-    setTimeout(() => {
-      store.setWarningVisibility(false);
-    }, 1000);
     return;
   }
   if (isAuthenticated.value == true) {
     auth.value = "Nasi Kecap Madura Pak Agus";
+    if (isShowNotification.value == true)
+      store.setNotificationVisibility(false);
     navigateTo("/dashboard");
   }
 };

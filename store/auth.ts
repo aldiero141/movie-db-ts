@@ -1,11 +1,12 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-import { IAuth } from "@/models/auth";
 import { useAuthAccount } from "@/composables/auth";
 
 export const useAuthStore = defineStore("auth", () => {
   const type = ref("login");
   const isAuthenticated = ref<boolean>(false);
+  const isShowNotification = ref<boolean>(false);
+  const isShowWarning = ref<boolean>(false);
 
   const { account, addAccount, removeAccount, validateAccount } =
     useAuthAccount();
@@ -17,6 +18,12 @@ export const useAuthStore = defineStore("auth", () => {
   const setAuth = (arg: boolean) => {
     isAuthenticated.value = arg;
   };
+  const setNotificationVisibility = (arg: boolean) => {
+    isShowNotification.value = arg;
+  };
+  const setWarningVisibility = (arg: boolean) => {
+    isShowWarning.value = arg;
+  };
 
   return {
     type,
@@ -27,5 +34,9 @@ export const useAuthStore = defineStore("auth", () => {
     validateAccount,
     isAuthenticated,
     setAuth,
+    isShowNotification,
+    setNotificationVisibility,
+    isShowWarning,
+    setWarningVisibility,
   };
 });

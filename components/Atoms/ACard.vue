@@ -1,6 +1,6 @@
 <template>
   <div
-    class="rounded border border-gray-50 drop-shadow-md shadow-grey-100 bg-white"
+    class="rounded border border-gray-50 shadow-grey-100 bg-white"
     :class="{
       'w-fit h-fit': fit,
     }"

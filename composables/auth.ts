@@ -31,5 +31,13 @@ export function useAuthAccount() {
     });
     return result;
   };
-  return { account, addAccount, removeAccount, validateAccount };
+
+  const isLoggedIn = () => {
+    const auth = useCookie("auth");
+    const crypto = useCrypto();
+    const decrypted = crypto.decryptToken(auth.value ? auth.value : "");
+    console.log(decrypted);
+    return decrypted !== "Nasi-Cumi-Hitam-Madura_Pak-Kris";
+  };
+  return { account, addAccount, removeAccount, validateAccount, isLoggedIn };
 }

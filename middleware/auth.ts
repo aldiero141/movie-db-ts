@@ -1,6 +1,8 @@
+import { useAuthAccount } from "@/composables/auth";
+
 export default defineNuxtRouteMiddleware((to, from) => {
-  const auth = useCookie("auth");
-  if (auth.value !== "Nasi Kecap Madura Pak Agus") {
+  const auth = useAuthAccount();
+  if (auth.isLoggedIn()) {
     return navigateTo("/");
   }
 });

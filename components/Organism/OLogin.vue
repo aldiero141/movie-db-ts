@@ -42,6 +42,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useAuthStore } from "~~/store/auth";
+import { useCrypto } from "~~/composables/crypto";
 import { IAuth } from "@/models/auth";
 import { storeToRefs } from "pinia";
 
@@ -65,6 +66,7 @@ watch(isShowWarning, (new_warning) => {
 });
 
 const login = (arg: IAuth) => {
+  const crypto = useCrypto();
   store.setAuth(store.validateAccount(arg));
 
   if (isAuthenticated.value == false) {
@@ -72,7 +74,8 @@ const login = (arg: IAuth) => {
     return;
   }
   if (isAuthenticated.value == true) {
-    auth.value = "Nasi Kecap Madura Pak Agus";
+    auth.value = crypto.encryptToken("Nasi-Cumi-Hitam-Madura_Pak-Kris");
+
     if (isShowNotification.value == true)
       store.setNotificationVisibility(false);
     navigateTo("/dashboard");

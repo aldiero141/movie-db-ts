@@ -9,6 +9,7 @@
       :type="type"
       @input="inputValue"
     />
+    <atoms-a-text error v-if="errorMessage"> {{ errorMessage }} </atoms-a-text>
   </div>
 </template>
 
@@ -25,6 +26,10 @@ defineProps({
     default: "",
   },
   type: {
+    type: String,
+    default: "",
+  },
+  errorMessage: {
     type: String,
     default: "",
   },
